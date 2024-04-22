@@ -35,9 +35,11 @@ inputs:
   mkl-version:
     description: 'Set Intel MKL version (default is most recent)'
     default: ''
-  env-dupate:
+  env-update:
     description: 'Apply environment modifications to $GITHUB_ENV (experimental)'
     default: true
+  shell:
+    default: bash
 
 runs:
   using: "composite"
@@ -45,6 +47,7 @@ runs:
   steps:
 
     - name: install-intel
+      shell: ${{ inputs.shell }}
       run: |
         cd /tmp
         wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
