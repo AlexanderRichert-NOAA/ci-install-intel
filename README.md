@@ -1,4 +1,4 @@
-# install-intel
+# GitHub CI Action: install-intel
 
 This repository provides a GitHub Action for download and caching the Intel
 Classic and oneAPI compilers for Linux
