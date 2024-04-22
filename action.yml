@@ -94,7 +94,7 @@ runs:
           fi
         fi
         # Run the installation
-        apt install $COMPONENTS
+        sudo apt install $COMPONENTS
         if [ ${{ inputs.env-update }} ]; then
           # Inject environment changes into $GITHUB_ENV
           diff --unchanged-line-format= --old-line-format= --new-line-format='%L' <(env) <(. /opt/intel/oneapi/setvars.sh && env) >> $GITHUB_ENV
