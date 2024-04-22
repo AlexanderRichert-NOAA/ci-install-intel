@@ -1,14 +1,14 @@
-# GitHub CI Action: install-intel
+# GitHub CI Action: install-intel-toolkit
 
 This repository provides a GitHub Action for download and caching the Intel
-Classic and oneAPI compilers for Linux
+Classic and oneAPI compilers for Linux, as well as OpenMP, MPI, and MKL.
 
 This repository supports [NCEPLIBS](https://github.com/NOAA-EMC/NCEPLIBS) CI
 workflows.
 
 To submit bug reports, feature requests, or other code-related issues including
 usage questions, please create a [GitHub
-issue](https://github.com/NOAA-EMC/ci-install-intel/issues). For general
+issue](https://github.com/NOAA-EMC/ci-install-intel-toolkit/issues). For general
 NCEPLIBS inquiries, contact [Ed Hartnett](mailto:edward.hartnett@noaa.gov)
 (secondary point of contact [Alex Richert](mailto:alexander.richert@noaa.gov)).
 
@@ -21,7 +21,7 @@ NCEPLIBS inquiries, contact [Ed Hartnett](mailto:edward.hartnett@noaa.gov)
 To use this Action, include the following step in your GitHub Actions workflow:
 ```
       - name: "Install Intel compilers"
-        uses: NOAA-EMC/ci-install-intel@develop
+        uses: NOAA-EMC/ci-install-intel-toolkit@develop
         with:
           install-mpi: true
 ```
