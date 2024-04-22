@@ -97,10 +97,10 @@ runs:
         echo "COMPONENTS: $COMPONENTS"
         sudo apt install $COMPONENTS
         if [ ${{ inputs.env-update }} ]; then
-          echo "Updating $GITHUB_ENV"
-          sort $GITHUB_ENV > ~/bkp
           # Inject environment changes into $GITHUB_ENV
-          . /opt/intel/oneapi/setvars.sh
-          printenv | sort > $GITHUB_ENV
-          diff ~/bkp $GITHUB_ENV
+          echo 'Updating $GITHUB_ENV'
+          bash -c "printenv" > before.txt
+          bash -c ". /opt/intel/oneapi/setvars.sh && printenv" > after.txt
+          diff --unchanged-line-format= --old-line-format= --new-line-format='%L' before.txt after.txt > update.txt
+          cat update.txt |& tee -a $GITHUB_ENV
         fi
