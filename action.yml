@@ -57,11 +57,11 @@ runs:
         sudo apt-get update
         if [ ${{ inputs.install-classic }} == true ]; then
           COMPONENTS+=" intel-oneapi-compiler-dpcpp-cpp-and-cpp-classic"
-          if [ ! -z ${{ inputs.classic-version }}; then
+          if [ ! -z ${{ inputs.classic-version }} ]; then
             COMPONENTS+=-${{ inputs.classic-version }}
           fi
           COMPONENTS=+=" intel-oneapi-compiler-fortran"
-          if [ ! -z ${{ inputs.classic-version }}; then
+          if [ ! -z ${{ inputs.classic-version }} ]; then
             COMPONENTS+=-${{ inputs.classic-version }}
           fi
         fi
@@ -71,25 +71,25 @@ runs:
             COMPONENTS+=-${{ inputs.oneapi-version }}
           fi
           COMPONENTS=+=" intel-oneapi-compiler-fortran"
-          if [ ! -z ${{ inputs.oneapi-version }}; then
+          if [ ! -z ${{ inputs.oneapi-version }} ]; then
             COMPONENTS+=-${{ inputs.oneapi-version }}
           fi
         fi
         if [ ${{ inputs.install-mpi }} == true ];
           COMPONENTS+=" intel-oneapi-mpi-devel"
-          if [ ! -z ${{ inputs.mpi-version }}; then
+          if [ ! -z ${{ inputs.mpi-version }} ]; then
             COMPONENTS+=-${{ inputs.mpi-version }}
           fi
         fi
         if [ ${{ inputs.install-openmp }} == true ];
           COMPONENTS+=" intel-oneapi-openmp"
-          if [ ! -z ${{ inputs.openmp-version }}; then
+          if [ ! -z ${{ inputs.openmp-version }} ]; then
             COMPONENTS+=-${{ inputs.openmp-version }}
           fi
         fi
         if [ ${{ inputs.install-mkl }} == true ];
           COMPONENTS+=" intel-oneapi-mkl-devel"
-          if [ ! -z ${{ inputs.mkl-version }}; then
+          if [ ! -z ${{ inputs.mkl-version }} ]; then
             COMPONENTS+=-${{ inputs.mkl-version }}
           fi
         fi
