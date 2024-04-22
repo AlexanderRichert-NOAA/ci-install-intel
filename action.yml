@@ -1,0 +1,96 @@
+# This action.yml provides a GitHub Action for installing Intel Classic and
+# OneAPI compilers.
+# Alex Richert, April 2024
+name: 'Install Intel compilers'
+description: 'Installs Intel compilers through "apt" for Ubuntu runners'
+
+inputs:
+  install-classic:
+    description: 'Install Intel Classic compilers (icc/icpc/ifort)'
+    default: true
+  classic-version:
+    description: 'Set Intel Classic version'
+    default: '2023.2.1'
+  install-oneapi:
+    description: 'Install Intel OneAPI compilers (icx/icpx/ifx)'
+    default: true
+  oneapi-version:
+    description: 'Set Intel OneAPI version'
+    default: '2023.2.1'
+  install-mpi:
+    description: 'Install Intel MPI libraries'
+    default: false
+  mpi-version:
+    description: 'Set Intel MPI version (default is most recent)'
+    default: ''
+  install-openmp:
+    description: 'Install Intel OpenMP libraries'
+    default: false
+  openmp-version:
+    description: 'Set Intel OpenMP library version (default is most recent)'
+    default: ''
+  install-mkl:
+    description: 'Install Intel MKL'
+    default: false
+  mkl-version:
+    description: 'Set Intel MKL version (default is most recent)'
+    default: ''
+  env-dupate:
+    description: 'Apply environment modifications to $GITHUB_ENV (experimental)'
+    default: true
+
+runs:
+  using: "composite"
+
+  steps:
+
+    - name: install-intel
+      run: |
+        cd /tmp
+        wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+        sudo apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+        rm GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+        echo "deb https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
+        sudo apt-get update
+        if [ ${{ inputs.install-classic }} == true ]; then
+          COMPONENTS+=" intel-oneapi-compiler-dpcpp-cpp-and-cpp-classic"
+          if [ ! -z ${{ inputs.classic-version }}; then
+            COMPONENTS+=-${{ inputs.classic-version }}
+          fi
+          COMPONENTS=+=" intel-oneapi-compiler-fortran"
+          if [ ! -z ${{ inputs.classic-version }}; then
+            COMPONENTS+=-${{ inputs.classic-version }}
+          fi
+        fi
+        if [ ${{ inputs.install-oneapi }} == true ]; then
+          COMPONENTS+=" intel-oneapi-dpcpp-cpp"
+          if [ ! -z ${{ inputs.oneapi-version }} ]; then
+            COMPONENTS+=-${{ inputs.oneapi-version }}
+          fi
+          COMPONENTS=+=" intel-oneapi-compiler-fortran"
+          if [ ! -z ${{ inputs.oneapi-version }}; then
+            COMPONENTS+=-${{ inputs.oneapi-version }}
+          fi
+        fi
+        if [ ${{ inputs.install-mpi }} == true ];
+          COMPONENTS+=" intel-oneapi-mpi-devel"
+          if [ ! -z ${{ inputs.mpi-version }}; then
+            COMPONENTS+=-${{ inputs.mpi-version }}
+          fi
+        fi
+        if [ ${{ inputs.install-openmp }} == true ];
+          COMPONENTS+=" intel-oneapi-openmp"
+          if [ ! -z ${{ inputs.openmp-version }}; then
+            COMPONENTS+=-${{ inputs.openmp-version }}
+          fi
+        fi
+        if [ ${{ inputs.install-mkl }} == true ];
+          COMPONENTS+=" intel-oneapi-mkl-devel"
+          if [ ! -z ${{ inputs.mkl-version }}; then
+            COMPONENTS+=-${{ inputs.mkl-version }}
+          fi
+        fi
+        if [ ${{ inputs.env-update }} ]; then
+          # Inject environment changes into $GITHUB_ENV
+          diff --unchanged-line-format= --old-line-format= --new-line-format='%L' <(env) <(. /opt/intel/oneapi/setvars.sh && env) >> $GITHUB_ENV
+        fi
