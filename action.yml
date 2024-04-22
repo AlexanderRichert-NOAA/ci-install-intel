@@ -108,11 +108,14 @@ runs:
         # Run the installation
         echo "COMPONENTS: $COMPONENTS"
         sudo apt install $COMPONENTS
-        if [ ${{ inputs.env-update }} == true ]; then
-          # Inject environment changes into $GITHUB_ENV
-          echo 'Updating $GITHUB_ENV'
-          bash -c "env > /tmp/before.txt"
-          bash -c ". /opt/intel/oneapi/setvars.sh && env > /tmp/after.txt"
-          diff --unchanged-line-format= --old-line-format= --new-line-format='%L' /tmp/before.txt /tmp/after.txt > /tmp/update.txt || true
-          cat /tmp/update.txt |& tee -a $GITHUB_ENV
-        fi
+
+    - name: "Modify environment to use Intel compilers"
+      if: ${{ inputs.env-update }}
+      shell: ${{ inputs.shell }}
+      run: |
+        # Inject environment changes into $GITHUB_ENV
+        echo 'Updating $GITHUB_ENV'
+        bash -c "env > /tmp/before.txt"
+        bash -c ". /opt/intel/oneapi/setvars.sh && env > /tmp/after.txt"
+        diff --unchanged-line-format= --old-line-format= --new-line-format='%L' /tmp/before.txt /tmp/after.txt > /tmp/update.txt || true
+        cat /tmp/update.txt |& tee -a $GITHUB_ENV
