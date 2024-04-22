@@ -50,6 +50,7 @@ runs:
   steps:
 
     - name: "Cache setup"
+      id: intel-cache
       uses: actions/cache@v4
       if: ${{ inputs.cache }}
       with:
@@ -57,6 +58,7 @@ runs:
         key: ${{ inputs.install-classic }}-${{ inputs.classic-version }}-${{ inputs.install-oneapi }}-${{ inputs.oneapi-version }}-${{ inputs.install-mpi }}-${{ inputs.mpi-version }}-${{ inputs.install-openmp }}-${{ inputs.openmp-version }}-${{ inputs.install-mkl }}-${{ inputs.mkl-version }}
 
     - name: "Install Intel compilers"
+      if: steps.intel-cache.outputs.cache-hit != 'true'
       shell: ${{ inputs.shell }}
       run: |
         cd /tmp
