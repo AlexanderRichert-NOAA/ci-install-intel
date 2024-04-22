@@ -55,7 +55,7 @@ runs:
       if: ${{ inputs.cache }}
       with:
         path: /opt/intel
-        key: ${{ inputs.install-classic }}-${{ inputs.classic-version }}-${{ inputs.install-oneapi }}-${{ inputs.oneapi-version }}-${{ inputs.install-mpi }}-${{ inputs.mpi-version }}-${{ inputs.install-openmp }}-${{ inputs.openmp-version }}-${{ inputs.install-mkl }}-${{ inputs.mkl-version }}
+        key: intel-${{ inputs.install-classic }}-${{ inputs.classic-version }}-${{ inputs.install-oneapi }}-${{ inputs.oneapi-version }}-${{ inputs.install-mpi }}-${{ inputs.mpi-version }}-${{ inputs.install-openmp }}-${{ inputs.openmp-version }}-${{ inputs.install-mkl }}-${{ inputs.mkl-version }}
 
     - name: "Install Intel compilers"
       if: steps.intel-cache.outputs.cache-hit != 'true'
