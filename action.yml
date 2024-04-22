@@ -38,6 +38,9 @@ inputs:
   env-update:
     description: 'Apply environment modifications to $GITHUB_ENV (experimental)'
     default: true
+  cache:
+    description: 'Cache to repository cache with actions/cache'
+    default: true
   shell:
     default: bash
 
@@ -46,7 +49,14 @@ runs:
 
   steps:
 
-    - name: install-intel
+    - name: "Cache setup"
+      uses: actions/cache@v4
+      if: ${{ inputs.cache }}
+      with:
+        path: /opt/intel
+        key: ${{ inputs.install-classic }}-${{ inputs.classic-version }}-${{ inputs.install-oneapi }}-${{ inputs.oneapi-version }}-${{ inputs.install-mpi }}-${{ inputs.mpi-version }}-${{ inputs.install-openmp }}-${{ inputs.openmp-version }}-${{ inputs.install-mkl }}-${{ inputs.mkl-version }}
+
+    - name: "Install Intel compilers"
       shell: ${{ inputs.shell }}
       run: |
         cd /tmp
