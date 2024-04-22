@@ -8,7 +8,7 @@ workflows.
 
 To submit bug reports, feature requests, or other code-related issues including
 usage questions, please create a [GitHub
-issue](https://github.com/NOAA-EMC/build-nceplibs/issues). For general
+issue](https://github.com/NOAA-EMC/ci-install-intel/issues). For general
 NCEPLIBS inquiries, contact [Ed Hartnett](mailto:edward.hartnett@noaa.gov)
 (secondary point of contact [Alex Richert](mailto:alexander.richert@noaa.gov)).
 
@@ -21,10 +21,12 @@ NCEPLIBS inquiries, contact [Ed Hartnett](mailto:edward.hartnett@noaa.gov)
 To use this Action, include the following step in your GitHub Actions workflow:
 ```
       - name: "Install Intel compilers"
-        uses: NOAA-EMC/install-intel@develop
+        uses: NOAA-EMC/ci-install-intel@develop
         with:
           install-mpi: true
 ```
+
+The current default version is 2023.2.1, which supports both Classic and oneAPI.
 
 See `actions.yml` for the full list of available options and their defaults.
 
