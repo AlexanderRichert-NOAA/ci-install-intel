@@ -75,19 +75,19 @@ runs:
             COMPONENTS+=-${{ inputs.oneapi-version }}
           fi
         fi
-        if [ ${{ inputs.install-mpi }} == true ];
+        if [ ${{ inputs.install-mpi }} == true ]; then
           COMPONENTS+=" intel-oneapi-mpi-devel"
           if [ ! -z ${{ inputs.mpi-version }} ]; then
             COMPONENTS+=-${{ inputs.mpi-version }}
           fi
         fi
-        if [ ${{ inputs.install-openmp }} == true ];
+        if [ ${{ inputs.install-openmp }} == true ]; then
           COMPONENTS+=" intel-oneapi-openmp"
           if [ ! -z ${{ inputs.openmp-version }} ]; then
             COMPONENTS+=-${{ inputs.openmp-version }}
           fi
         fi
-        if [ ${{ inputs.install-mkl }} == true ];
+        if [ ${{ inputs.install-mkl }} == true ]; then
           COMPONENTS+=" intel-oneapi-mkl-devel"
           if [ ! -z ${{ inputs.mkl-version }} ]; then
             COMPONENTS+=-${{ inputs.mkl-version }}
