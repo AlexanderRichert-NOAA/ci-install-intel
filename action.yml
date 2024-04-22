@@ -99,8 +99,8 @@ runs:
         if [ ${{ inputs.env-update }} == true ]; then
           # Inject environment changes into $GITHUB_ENV
           echo 'Updating $GITHUB_ENV'
-          bash -c "printenv" > before.txt
-          bash -c ". /opt/intel/oneapi/setvars.sh && printenv" > after.txt
-          diff --unchanged-line-format= --old-line-format= --new-line-format='%L' before.txt after.txt > update.txt || true
-          cat update.txt |& tee -a $GITHUB_ENV
+          bash -c "env > /tmp/before.txt"
+          bash -c ". /opt/intel/oneapi/setvars.sh && env > /tmp/after.txt"
+          diff --unchanged-line-format= --old-line-format= --new-line-format='%L' /tmp/before.txt /tmp/after.txt > /tmp/update.txt || true
+          cat /tmp/update.txt |& tee -a $GITHUB_ENV
         fi
