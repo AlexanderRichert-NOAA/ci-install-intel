@@ -60,7 +60,7 @@ runs:
           if [ ! -z ${{ inputs.classic-version }} ]; then
             COMPONENTS+=-${{ inputs.classic-version }}
           fi
-          COMPONENTS=+=" intel-oneapi-compiler-fortran"
+          COMPONENTS+=" intel-oneapi-compiler-fortran"
           if [ ! -z ${{ inputs.classic-version }} ]; then
             COMPONENTS+=-${{ inputs.classic-version }}
           fi
@@ -70,7 +70,7 @@ runs:
           if [ ! -z ${{ inputs.oneapi-version }} ]; then
             COMPONENTS+=-${{ inputs.oneapi-version }}
           fi
-          COMPONENTS=+=" intel-oneapi-compiler-fortran"
+          COMPONENTS+=" intel-oneapi-compiler-fortran"
           if [ ! -z ${{ inputs.oneapi-version }} ]; then
             COMPONENTS+=-${{ inputs.oneapi-version }}
           fi
