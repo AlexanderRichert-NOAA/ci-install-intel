@@ -93,6 +93,8 @@ runs:
             COMPONENTS+=-${{ inputs.mkl-version }}
           fi
         fi
+        # Run the installation
+        apt install $COMPONENTS
         if [ ${{ inputs.env-update }} ]; then
           # Inject environment changes into $GITHUB_ENV
           diff --unchanged-line-format= --old-line-format= --new-line-format='%L' <(env) <(. /opt/intel/oneapi/setvars.sh && env) >> $GITHUB_ENV
