@@ -1,5 +1,5 @@
 # This action.yml provides a GitHub Action for installing Intel Classic and
-# OneAPI compilers.
+# oneAPI compilers.
 # Alex Richert, April 2024
 name: 'Install Intel compilers'
 description: 'Installs Intel compilers through "apt" for Ubuntu runners'
@@ -12,10 +12,10 @@ inputs:
     description: 'Set Intel Classic version'
     default: '2023.2.1'
   install-oneapi:
-    description: 'Install Intel OneAPI compilers (icx/icpx/ifx)'
+    description: 'Install Intel oneAPI compilers (icx/icpx/ifx)'
     default: true
   oneapi-version:
-    description: 'Set Intel OneAPI version'
+    description: 'Set Intel oneAPI version'
     default: '2023.2.1'
   install-mpi:
     description: 'Install Intel MPI libraries'
