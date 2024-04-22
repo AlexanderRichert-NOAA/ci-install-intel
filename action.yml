@@ -94,6 +94,7 @@ runs:
           fi
         fi
         # Run the installation
+        echo "COMPONENTS: $COMPONENTS"
         sudo apt install $COMPONENTS
         if [ ${{ inputs.env-update }} ]; then
           # Inject environment changes into $GITHUB_ENV
