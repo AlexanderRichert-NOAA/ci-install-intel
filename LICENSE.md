@@ -1,6 +1,6 @@
 Copyright 2024 National Oceanic and Atmospheric Administration
 
-The ci-install-intel repository is maintained by NOAA at https://github.com/NOAA-EMC/ci-install-intel.
+The ci-install-intel-toolkit repository is maintained by NOAA at https://github.com/NOAA-EMC/ci-install-intel-toolkit.
 
 The National Oceanic and Atmospheric Administration is releasing this code under the GNU Lesser General Public License v3.0 (the "License"); you may not use this code except in compliance with the License.
 
