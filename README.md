@@ -24,7 +24,6 @@ To use this Action, include the following step in your GitHub Actions workflow:
         uses: NOAA-EMC/install-intel@develop
         with:
           install-mpi: true
-          env-update: true
 ```
 
 See `actions.yml` for the full list of available options and their defaults.
