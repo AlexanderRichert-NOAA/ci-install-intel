@@ -96,7 +96,7 @@ runs:
         # Run the installation
         echo "COMPONENTS: $COMPONENTS"
         sudo apt install $COMPONENTS
-        if [ ${{ inputs.env-update }} ]; then
+        if [ ${{ inputs.env-update }} == true ]; then
           # Inject environment changes into $GITHUB_ENV
           echo 'Updating $GITHUB_ENV'
           bash -c "printenv" > before.txt
