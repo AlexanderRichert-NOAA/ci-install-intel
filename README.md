@@ -28,7 +28,7 @@ To use this Action, include the following step in your GitHub Actions workflow:
 
 The current default version is 2023.2.1, which supports both Classic and oneAPI.
 
-See `actions.yml` for the full list of available options and their defaults.
+See `action.yml` for the full list of available options and their defaults.
 
 ## Disclaimer
 
