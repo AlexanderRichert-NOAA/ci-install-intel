@@ -20,7 +20,7 @@ NCEPLIBS inquiries, contact [Ed Hartnett](mailto:edward.hartnett@noaa.gov)
 
 To use this Action, include the following step in your GitHub Actions workflow:
 ```
-      - name: "Install Intel compilers"
+      - name: "Install Intel compilers & MPI"
         uses: NOAA-EMC/ci-install-intel-toolkit@develop
         with:
           install-mpi: true
