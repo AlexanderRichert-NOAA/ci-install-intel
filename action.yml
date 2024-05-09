@@ -23,6 +23,9 @@ inputs:
   mpi-version:
     description: 'Set Intel MPI version (default is most recent)'
     default: '2021.10.0'
+  mpi-wrapper-setup:
+    description: 'Choose whether to use "oneapi" or "classic" MPI wrapper, or "none"'
+    defulat: 'none'
   install-openmp:
     description: 'Install Intel OpenMP libraries'
     default: false
@@ -119,3 +122,8 @@ runs:
         bash -c ". /opt/intel/oneapi/setvars.sh && env > /tmp/after.txt"
         diff --unchanged-line-format= --old-line-format= --new-line-format='%L' /tmp/before.txt /tmp/after.txt > /tmp/update.txt || true
         cat /tmp/update.txt |& tee -a $GITHUB_ENV
+        if [ ${{ inputs.mpi-wrapper-setup }} == "oneapi" ]; then
+          echo -ne "CC=mpiicx\nFC=mpiifx" >> $GITHUB_ENV
+        elif [ ${{ inputs.mpi-wrapper-setup }} == "classic" ]; then
+          echo -ne "CC=mpiicc\nFC=mpiifort" >> $GITHUB_ENV
+        fi
