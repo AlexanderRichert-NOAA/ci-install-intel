@@ -25,7 +25,7 @@ inputs:
     default: '2021.10.0'
   mpi-wrapper-setup:
     description: 'Choose whether to use "oneapi" or "classic" MPI wrapper, or "none"'
-    defulat: 'none'
+    default: 'none'
   install-openmp:
     description: 'Install Intel OpenMP libraries'
     default: false
@@ -46,6 +46,9 @@ inputs:
     default: true
   shell:
     default: bash
+  compiler-setup:
+    description: 'Set CC, CXX, FC as part of environment setup ("env-update"); choose "oneapi" or "classic"'
+    default: ''
 
 runs:
   using: "composite"
@@ -122,8 +125,13 @@ runs:
         bash -c ". /opt/intel/oneapi/setvars.sh && env > /tmp/after.txt"
         diff --unchanged-line-format= --old-line-format= --new-line-format='%L' /tmp/before.txt /tmp/after.txt > /tmp/update.txt || true
         cat /tmp/update.txt |& tee -a $GITHUB_ENV
-        if [ ${{ inputs.mpi-wrapper-setup }} == "oneapi" ]; then
-          echo -ne "CC=mpiicx\nFC=mpiifx" >> $GITHUB_ENV
-        elif [ ${{ inputs.mpi-wrapper-setup }} == "classic" ]; then
-          echo -ne "CC=mpiicc\nFC=mpiifort" >> $GITHUB_ENV
+        if [ "${{ inputs.compiler-setup }}" == "oneapi" ]; then
+          echo -ne "CC=icx\nCXX=icpx\nFC=ifx" >> $GITHUB_ENV
+        elif [ "${{ inputs.compiler-setup }}" == "classic" ]; then
+          echo -ne "CC=icc\nCXX=icpc\nFC=ifort" >> $GITHUB_ENV
+        fi
+        if [ "${{ inputs.mpi-wrapper-setup }}" == "oneapi" ]; then
+          echo -ne "CC=mpiicx\nCXX=mpiicpx\nFC=mpiifx" >> $GITHUB_ENV
+        elif [ "${{ inputs.mpi-wrapper-setup }}" == "classic" ]; then
+          echo -ne "CC=mpiicc\nCXX=mpiicpc\nFC=mpiifort" >> $GITHUB_ENV
         fi
