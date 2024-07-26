@@ -113,7 +113,7 @@ runs:
         fi
         # Run the installation
         echo "COMPONENTS: $COMPONENTS"
-        sudo apt install $COMPONENTS
+        sudo apt-get install --no-install-recommends --no-install-suggests $COMPONENTS
 
     - name: "Modify environment to use Intel compilers"
       if: ${{ inputs.env-update }}
