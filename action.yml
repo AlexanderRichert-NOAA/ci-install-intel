@@ -84,7 +84,7 @@ runs:
           fi
         fi
         if [ ${{ inputs.install-oneapi }} == true ]; then
-          COMPONENTS+=" intel-oneapi-dpcpp-cpp"
+          COMPONENTS+=" intel-oneapi-compiler-dpcpp-cpp"
           if [ ! -z ${{ inputs.oneapi-version }} ]; then
             COMPONENTS+=-${{ inputs.oneapi-version }}
           fi
