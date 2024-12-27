@@ -21,7 +21,7 @@ inputs:
     description: 'Install Intel MPI libraries'
     default: false
   mpi-version:
-    description: 'Set Intel MPI version (default is most recent)'
+    description: 'Set Intel MPI version'
     default: '2021.10.0'
   mpi-wrapper-setup:
     description: 'Choose whether to use "oneapi" or "classic" MPI wrapper, or "none"'
@@ -30,13 +30,13 @@ inputs:
     description: 'Install Intel OpenMP libraries'
     default: false
   openmp-version:
-    description: 'Set Intel OpenMP library version (default is most recent)'
+    description: 'Set Intel OpenMP library version'
     default: '2023.2.1'
   install-mkl:
     description: 'Install Intel MKL'
     default: false
   mkl-version:
-    description: 'Set Intel MKL version (default is most recent)'
+    description: 'Set Intel MKL version'
     default: '2023.2.0'
   env-update:
     description: 'Apply environment modifications to $GITHUB_ENV (experimental)'
