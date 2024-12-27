@@ -135,3 +135,7 @@ runs:
         elif [ "${{ inputs.mpi-wrapper-setup }}" == "classic" ]; then
           echo -ne "CC=mpiicc\nCXX=mpiicpc\nFC=mpiifort" >> $GITHUB_ENV
         fi
+        echo "export CI_INTEL_CLASSIC_VERSION=${{ inputs.classic-version }}" >> $GITHUB_ENV
+        echo "export CI_INTEL_ONEAPI_VERSION=${{ inputs.oneapi-version }}" >> $GITHUB_ENV
+        echo "export CI_INTEL_MPI_VERSION=${{ inputs.mpi-version }}" >> $GITHUB_ENV
+        echo "export CI_INTEL_MKL_VERSION=${{ inputs.mkl-version }}" >> $GITHUB_ENV
