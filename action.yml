@@ -132,10 +132,12 @@ runs:
         fi
         if [ "${{ inputs.mpi-wrapper-setup }}" == "oneapi" ]; then
           echo -ne "CC=mpiicx\nCXX=mpiicpx\nFC=mpiifx" >> $GITHUB_ENV
+          echo -ne "I_MPI_CC=icx\nI_MPI_CXX=icpx\nI_MPI_FC=ifx\nI_MPI_F77=ifx" >> $GITHUB_ENV
         elif [ "${{ inputs.mpi-wrapper-setup }}" == "classic" ]; then
           echo -ne "CC=mpiicc\nCXX=mpiicpc\nFC=mpiifort" >> $GITHUB_ENV
+          echo -ne "I_MPI_CC=icc\nI_MPI_CXX=icpc\nI_MPI_FC=ifort\nI_MPI_F77=ifort" >> $GITHUB_ENV
         fi
-        echo "export CI_INTEL_CLASSIC_VERSION=${{ inputs.classic-version }}" >> $GITHUB_ENV
-        echo "export CI_INTEL_ONEAPI_VERSION=${{ inputs.oneapi-version }}" >> $GITHUB_ENV
-        echo "export CI_INTEL_MPI_VERSION=${{ inputs.mpi-version }}" >> $GITHUB_ENV
-        echo "export CI_INTEL_MKL_VERSION=${{ inputs.mkl-version }}" >> $GITHUB_ENV
+        echo -n "CI_INTEL_CLASSIC_VERSION=${{ inputs.classic-version }}" >> $GITHUB_ENV
+        echo -n "CI_INTEL_ONEAPI_VERSION=${{ inputs.oneapi-version }}" >> $GITHUB_ENV
+        echo -n "CI_INTEL_MPI_VERSION=${{ inputs.mpi-version }}" >> $GITHUB_ENV
+        echo -n "CI_INTEL_MKL_VERSION=${{ inputs.mkl-version }}" >> $GITHUB_ENV
