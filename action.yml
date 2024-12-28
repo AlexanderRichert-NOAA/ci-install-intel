@@ -39,7 +39,7 @@ inputs:
     description: 'Set Intel MKL version'
     default: '2023.2.0'
   env-update:
-    description: 'Apply environment modifications to $GITHUB_ENV (experimental)'
+    description: 'Apply environment modifications to $GITHUB_ENV'
     default: true
   cache:
     description: 'Cache to repository cache with actions/cache'
