@@ -57,7 +57,7 @@ runs:
 
     - name: "Cache setup"
       id: intel-cache
-      uses: actions/cache@v4
+      uses: actions/cache/restore@v4
       if: ${{ inputs.cache }}
       with:
         path: /opt/intel
