@@ -64,6 +64,7 @@ runs:
         key: intel-${{ inputs.install-classic }}-${{ inputs.classic-version }}-${{ inputs.install-oneapi }}-${{ inputs.oneapi-version }}-${{ inputs.install-mpi }}-${{ inputs.mpi-version }}-${{ inputs.install-openmp }}-${{ inputs.openmp-version }}-${{ inputs.install-mkl }}-${{ inputs.mkl-version }}
 
     - name: "Install Intel compilers"
+      id: intel-install
       if: steps.intel-cache.outputs.cache-hit != 'true'
       shell: ${{ inputs.shell }}
       run: |
@@ -114,6 +115,15 @@ runs:
         # Run the installation
         echo "COMPONENTS: $COMPONENTS"
         sudo apt-get install --no-install-recommends --no-install-suggests $COMPONENTS
+
+
+    - name: Always save Intel installation
+      id: intel-cache-save
+      if: steps.intel-install.outcome == 'success' && steps.intel-cache.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v4
+      with:
+        key: intel-${{ inputs.install-classic }}-${{ inputs.classic-version }}-${{ inputs.install-oneapi }}-${{ inputs.oneapi-version }}-${{ inputs.install-mpi }}-${{ inputs.mpi-version }}-${{ inputs.install-openmp }}-${{ inputs.openmp-version }}-${{ inputs.install-mkl }}-${{ inputs.mkl-version }}
+        path: /opt/intel
 
     - name: "Modify environment to use Intel compilers"
       if: ${{ inputs.env-update }}
