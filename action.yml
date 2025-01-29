@@ -50,7 +50,7 @@ inputs:
     description: 'Set CC, CXX, FC as part of environment setup ("env-update"); choose "oneapi" or "classic"'
     default: ''
   force-cache-save:
-    description: 'Save cache as long as toolkit installation is successful (i.e., do not wait for whole workflow to finish)
+    description: 'Save cache as long as toolkit installation is successful (i.e., do not wait for whole workflow to finish)'
     default: false
 
 runs:
