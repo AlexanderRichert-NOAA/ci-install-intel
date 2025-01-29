@@ -68,7 +68,7 @@ runs:
 
     - name: "Install Intel compilers"
       id: intel-install
-      if: steps.intel-cache.outputs.cache-hit != 'true'
+      if: ${{ steps.intel-cache.outputs.cache-hit != 'true' }}
       shell: ${{ inputs.shell }}
       run: |
         cd /tmp
