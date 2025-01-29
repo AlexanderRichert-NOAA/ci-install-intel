@@ -49,6 +49,9 @@ inputs:
   compiler-setup:
     description: 'Set CC, CXX, FC as part of environment setup ("env-update"); choose "oneapi" or "classic"'
     default: ''
+  force-cache-save:
+    description: 'Save cache as long as toolkit installation is successful (i.e., do not wait for whole workflow to finish)
+    default: false
 
 runs:
   using: "composite"
@@ -57,7 +60,7 @@ runs:
 
     - name: "Cache setup"
       id: intel-cache
-      uses: actions/cache/restore@v4
+      uses: actions/cache@v4
       if: ${{ inputs.cache }}
       with:
         path: /opt/intel
@@ -119,7 +122,7 @@ runs:
 
     - name: Always save Intel installation
       id: intel-cache-save
-      if: steps.intel-install.outcome == 'success' && steps.intel-cache.outputs.cache-hit != 'true'
+      if: steps.intel-install.outcome == 'success' && inputs.force-cache-save
       uses: actions/cache/save@v4
       continue-on-error: true
       with:
