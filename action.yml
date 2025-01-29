@@ -122,7 +122,7 @@ runs:
 
     - name: Always save Intel installation
       id: intel-cache-save
-      if: steps.intel-install.outcome == 'success' && inputs.force-cache-save
+      if: ${{ steps.intel-install.outcome == 'success' && inputs.force-cache-save == 'true' }}
       uses: actions/cache/save@v4
       continue-on-error: true
       with:
