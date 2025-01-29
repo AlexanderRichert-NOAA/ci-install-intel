@@ -121,6 +121,7 @@ runs:
       id: intel-cache-save
       if: steps.intel-install.outcome == 'success' && steps.intel-cache.outputs.cache-hit != 'true'
       uses: actions/cache/save@v4
+      continue-on-error: true
       with:
         key: intel-${{ inputs.install-classic }}-${{ inputs.classic-version }}-${{ inputs.install-oneapi }}-${{ inputs.oneapi-version }}-${{ inputs.install-mpi }}-${{ inputs.mpi-version }}-${{ inputs.install-openmp }}-${{ inputs.openmp-version }}-${{ inputs.install-mkl }}-${{ inputs.mkl-version }}
         path: /opt/intel
